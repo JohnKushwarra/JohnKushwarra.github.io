@@ -8,6 +8,7 @@
   <meta property="og:title" content="John Kushwarra — AI Engineer">
   <meta property="og:description" content="Sophomore AI Engineering major at Penn State. Building intelligent systems with modern AI tooling.">
   <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230f0f0f'/><text x='50' y='68' font-family='Georgia,serif' font-size='52' fill='%23f7c948' text-anchor='middle'>JK</text></svg>">
   <style>
     /* === Reset === */
     *, *::before, *::after {
@@ -182,11 +183,37 @@
       justify-content: center;
       text-align: center;
       padding-top: 80px;
+      position: relative;
     }
     .hero-content {
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.6;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    .scroll-hint svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--muted);
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
     }
     .hero-rule {
       width: 40px;
@@ -299,6 +326,50 @@
       50% { opacity: 0.5; transform: scale(0.85); }
     }
 
+    /* === Experience === */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .experience-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .experience-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .experience-role {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--text);
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .experience-company {
+      color: var(--accent);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    .experience-period {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .experience-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
     /* === Projects (ready for when section is uncommented) === */
     .projects-grid {
       display: grid;
@@ -378,7 +449,42 @@
     .contact-text {
       color: var(--muted);
       font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .contact-subtext {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .contact-email {
+      display: inline-block;
+      font-family: var(--serif);
+      font-size: 24px;
+      color: var(--accent);
+      text-decoration: none;
       margin-bottom: 28px;
+      position: relative;
+    }
+    .contact-email::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .contact-email:hover::after,
+    .contact-email:focus::after {
+      width: 100%;
+    }
+    .contact-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 24px auto;
     }
 
     /* === Footer === */
@@ -426,6 +532,7 @@
       <a href="#" class="nav-logo" aria-label="Back to top">JK</a>
       <div class="nav-links">
         <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
@@ -439,8 +546,8 @@
         <p class="label">AI Engineering</p>
         <h1>John Kushwarra</h1>
         <div class="hero-rule" aria-hidden="true"></div>
-        <p class="hero-tagline">Building intelligent systems with modern AI tooling</p>
-        <p class="hero-bio">Sophomore at Penn State studying AI Engineering. Spending 10–20 hours a week outside the classroom going deep on LLM APIs, prompt engineering, and the tooling that turns models into real products.</p>
+        <p class="hero-tagline">Turning large language models into real products</p>
+        <p class="hero-bio">Sophomore AI Engineering major at Penn State, focused on applied LLM development — from prompt engineering and structured outputs to building the tooling that connects models to the real world.</p>
         <div class="hero-links">
           <a href="https://github.com/JohnKushwarra" target="_blank" rel="noopener noreferrer">GitHub</a>
           <span class="hero-links-sep" aria-hidden="true">·</span>
@@ -448,6 +555,11 @@
           <span class="hero-links-sep" aria-hidden="true">·</span>
           <a href="mailto:jfk6111@psu.edu">Email</a>
         </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </div>
     </section>
 
@@ -489,6 +601,30 @@
       </div>
     </section>
 
+    <!-- === EXPERIENCE === -->
+    <section class="section" id="experience">
+      <div class="container">
+        <p class="label">Where I've Worked</p>
+        <h2>Experience</h2>
+        <div class="experience-list">
+          <div class="experience-item">
+            <div>
+              <div class="experience-role">Team Member</div>
+              <div class="experience-company">Yuengling</div>
+            </div>
+            <div class="experience-period">Present</div>
+          </div>
+          <div class="experience-item">
+            <div>
+              <div class="experience-role">Staff</div>
+              <div class="experience-company">Mahoning Valley Golf Course</div>
+            </div>
+            <div class="experience-period">Previous</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!--
     === PROJECTS SECTION ===
     Uncomment this section and add "Projects" to nav when first project is ready.
@@ -524,13 +660,14 @@
       <div class="container contact-content">
         <p class="label">Get In Touch</p>
         <h2>Contact</h2>
-        <p class="contact-text">Interested in working together or just want to connect?</p>
+        <p class="contact-text">Open to internships, research opportunities, and collaboration.</p>
+        <p class="contact-subtext">If you're working on something interesting with LLMs, I'd love to hear about it.</p>
+        <a href="mailto:jfk6111@psu.edu" class="contact-email">jfk6111@psu.edu</a>
+        <div class="contact-divider" aria-hidden="true"></div>
         <div class="hero-links">
           <a href="https://github.com/JohnKushwarra" target="_blank" rel="noopener noreferrer">GitHub</a>
           <span class="hero-links-sep" aria-hidden="true">·</span>
           <a href="https://linkedin.com/in/johnkushwarra" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <span class="hero-links-sep" aria-hidden="true">·</span>
-          <a href="mailto:jfk6111@psu.edu">Email</a>
         </div>
       </div>
     </section>

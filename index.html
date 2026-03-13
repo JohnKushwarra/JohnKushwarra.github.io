@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John Kushwarra — AI Engineer</title>
+  <meta name="description" content="John Kushwarra — Sophomore AI Engineering major at Penn State. Building intelligent systems with modern AI tooling.">
+  <meta property="og:title" content="John Kushwarra — AI Engineer">
+  <meta property="og:description" content="Sophomore AI Engineering major at Penn State. Building intelligent systems with modern AI tooling.">
+  <meta property="og:type" content="website">
+  <style>
+    /* === Reset === */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* === Design Tokens === */
+    :root {
+      --bg: #0f0f0f;
+      --text: #f5f0e8;
+      --accent: #f7c948;
+      --accent-hover: #ff6b35;
+      --muted: #8a8578;
+      --border: rgba(245, 240, 232, 0.08);
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    /* === Base === */
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* === Amber Gradient Lines (top & bottom bookends) === */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover), var(--accent));
+      z-index: 1000;
+    }
+    body::before { top: 0; }
+    body::after { bottom: 0; }
+
+    /* === Page Load Animation === */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    main {
+      animation: fadeIn 0.6s ease both;
+    }
+
+    /* === Layout === */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 140px 0;
+    }
+
+    /* === Typography === */
+    .label {
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: 56px;
+      line-height: 1.1;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 36px;
+      margin-bottom: 48px;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* === Skip Link === */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      z-index: 1001;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 8px;
+    }
+
+    /* === Navigation === */
+    .nav {
+      position: fixed;
+      top: 3px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 0;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--text);
+    }
+
+    /* === Hero === */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 24px 0;
+    }
+    .hero-tagline {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .hero-bio {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .hero-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .hero-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .hero-links a:hover::after,
+    .hero-links a:focus::after {
+      width: 100%;
+    }
+    .hero-links-sep {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* === Skills === */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .skills-col {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 28px;
+    }
+    .skills-col-header {
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--accent);
+      font-weight: 500;
+    }
+    .skills-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+    }
+    .skill-current { color: var(--text); }
+    .skill-learning { color: var(--text); }
+    .skill-planned { color: var(--muted); }
+    .skill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .skill-dot.solid {
+      background: var(--accent);
+    }
+    .skill-dot.pulse {
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .skill-dot.hollow {
+      background: transparent;
+      border: 1.5px solid var(--muted);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* === Projects (ready for when section is uncommented) === */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 28px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(245, 240, 232, 0.15);
+    }
+    .project-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .project-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .project-tag {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(247, 201, 72, 0.08);
+      border: 1px solid rgba(247, 201, 72, 0.2);
+      color: var(--accent);
+    }
+    .project-links {
+      display: flex;
+      gap: 16px;
+    }
+    .project-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .project-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .project-links a:hover::after,
+    .project-links a:focus::after {
+      width: 100%;
+    }
+
+    /* === Contact === */
+    .contact-content {
+      text-align: center;
+    }
+    .contact-text {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    /* === Footer === */
+    .footer {
+      padding: 40px 0 60px;
+      text-align: center;
+    }
+    .footer-text {
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .section { padding: 80px 0; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 28px; margin-bottom: 36px; }
+      .hero-tagline { font-size: 16px; }
+      .hero-bio { font-size: 15px; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 769px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* === Accessibility: Reduced Motion === */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="nav" id="nav">
+    <nav class="container nav-inner">
+      <a href="#" class="nav-logo" aria-label="Back to top">JK</a>
+      <div class="nav-links">
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- === HERO === -->
+    <section class="hero" id="hero">
+      <div class="container hero-content">
+        <p class="label">AI Engineering</p>
+        <h1>John Kushwarra</h1>
+        <div class="hero-rule" aria-hidden="true"></div>
+        <p class="hero-tagline">Building intelligent systems with modern AI tooling</p>
+        <p class="hero-bio">Sophomore at Penn State studying AI Engineering. Spending 10–20 hours a week outside the classroom going deep on LLM APIs, prompt engineering, and the tooling that turns models into real products.</p>
+        <div class="hero-links">
+          <a href="https://github.com/JohnKushwarra" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="hero-links-sep" aria-hidden="true">·</span>
+          <a href="https://linkedin.com/in/johnkushwarra" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="hero-links-sep" aria-hidden="true">·</span>
+          <a href="mailto:jfk6111@psu.edu">Email</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SKILLS === -->
+    <section class="section" id="skills">
+      <div class="container">
+        <p class="label">What I Work With</p>
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="skills-col">
+            <h3 class="skills-col-header">Building With</h3>
+            <ul class="skills-list">
+              <li class="skill-item skill-current"><span class="skill-dot solid" aria-hidden="true"></span>Python</li>
+              <li class="skill-item skill-current"><span class="skill-dot solid" aria-hidden="true"></span>Git &amp; GitHub</li>
+              <li class="skill-item skill-current"><span class="skill-dot solid" aria-hidden="true"></span>NumPy &amp; Pandas</li>
+            </ul>
+          </div>
+          <div class="skills-col">
+            <h3 class="skills-col-header">Currently Learning</h3>
+            <ul class="skills-list">
+              <li class="skill-item skill-learning"><span class="skill-dot pulse" aria-hidden="true"></span>LLM APIs (OpenAI &amp; Anthropic)</li>
+              <li class="skill-item skill-learning"><span class="skill-dot pulse" aria-hidden="true"></span>Prompt Engineering</li>
+              <li class="skill-item skill-learning"><span class="skill-dot pulse" aria-hidden="true"></span>Structured Outputs</li>
+              <li class="skill-item skill-learning"><span class="skill-dot pulse" aria-hidden="true"></span>Function Calling / Tool Use</li>
+            </ul>
+          </div>
+          <div class="skills-col">
+            <h3 class="skills-col-header">On My Radar</h3>
+            <ul class="skills-list">
+              <li class="skill-item skill-planned"><span class="skill-dot hollow" aria-hidden="true"></span>RAG Systems</li>
+              <li class="skill-item skill-planned"><span class="skill-dot hollow" aria-hidden="true"></span>AI Agents</li>
+              <li class="skill-item skill-planned"><span class="skill-dot hollow" aria-hidden="true"></span>Evaluation Frameworks</li>
+              <li class="skill-item skill-planned"><span class="skill-dot hollow" aria-hidden="true"></span>FastAPI</li>
+              <li class="skill-item skill-planned"><span class="skill-dot hollow" aria-hidden="true"></span>Vector Databases</li>
+              <li class="skill-item skill-planned"><span class="skill-dot hollow" aria-hidden="true"></span>System Design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+    === PROJECTS SECTION ===
+    Uncomment this section and add "Projects" to nav when first project is ready.
+    Also add to nav: <a href="#projects">Projects</a>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="label">What I'm Building</p>
+        <h2>Projects</h2>
+        <div class="projects-grid">
+
+          <article class="project-card">
+            <h3 class="project-title">Project Name</h3>
+            <p class="project-desc">One or two sentences about what this project does and why it matters.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">OpenAI API</span>
+            </div>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    === END PROJECTS SECTION ===
+    -->
+
+    <!-- === CONTACT === -->
+    <section class="section" id="contact">
+      <div class="container contact-content">
+        <p class="label">Get In Touch</p>
+        <h2>Contact</h2>
+        <p class="contact-text">Interested in working together or just want to connect?</p>
+        <div class="hero-links">
+          <a href="https://github.com/JohnKushwarra" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <span class="hero-links-sep" aria-hidden="true">·</span>
+          <a href="https://linkedin.com/in/johnkushwarra" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span class="hero-links-sep" aria-hidden="true">·</span>
+          <a href="mailto:jfk6111@psu.edu">Email</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">&copy; 2026 John Kushwarra</p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  </script>
+
+</body>
+</html>
